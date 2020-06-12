@@ -57,13 +57,19 @@ def merge_sort(arr):
 # implement an in-place merge sort algorithm
 def merge_in_place(arr, start, mid, end):
     # Your code here
+    # "Mid" is the beginning of the second list
     while start < mid and mid < end + 1:
 
+        # If the value at "start" < the value at "mid"
         if arr[start] < arr[mid]:
+            # Advance start
             start += 1
         else:
+            # For each item in the first half
             for i in range(start, mid):
+                # Swap the item and the "mid" value
                 arr[i], arr[mid] = arr[mid], arr[i]
+            # Advance start and mid
             start += 1
             mid += 1
 
@@ -73,12 +79,18 @@ def merge_in_place(arr, start, mid, end):
 def merge_sort_in_place(arr, l, r):
     # Your code here
 
+    # When both pointers are at the end, we're done!
     if r - l <= 0:
         return arr
 
+    # Find our midpoint
     mid = l + ((r - l) // 2)
+
+    # MSIP the left half
     merge_sort_in_place(arr, l, mid)
+    # MSIP the right half
     merge_sort_in_place(arr, mid + 1, r)
+    # MIP the whole thing
     merge_in_place(arr, l, mid + 1, r)
 
     return arr
